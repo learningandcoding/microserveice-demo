@@ -1,0 +1,9 @@
+server:
+  port: 18082
+spring:
+  application:
+    name: mall-order
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://localhost:8848

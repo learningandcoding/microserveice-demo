@@ -1,0 +1,15 @@
+server:
+  port: 18085
+spring:
+  application:
+    name: mall-dubbo-consumer
+dubbo:
+  application:
+    name: mall-dubbo-consumer
+    # 同一台机器启动冲突
+    qos-port: 22223
+  registry:
+    address: nacos://localhost:8848
+    protocol:
+        port: -1
+        name: dubbo

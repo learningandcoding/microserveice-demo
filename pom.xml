@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.0</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>org.example</groupId>
+    <artifactId>microservice-demo</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <!--表示该项目不会生成可执行的 JAR、WAR 或其他类型的构建产物，而是作为一个父项目（Parent Project）存在，主要用于管理子模块（子项目）的依赖和配置信息。-->
+    <packaging>pom</packaging>
+    <name>microservice-demo</name>
+    <description>microservice-demo</description>
+    <modules>
+        <module>mall-storage</module>
+        <module>mall-order</module>
+        <module>mall-account</module>
+        <module>mall-common</module>
+        <module>mall-dubbo-provider</module>
+        <module>mall-dubbo-consumer</module>
+        <module>mall-dubbo-interface</module>
+    </modules>
+    <properties>
+        <java.version>17</java.version>
+        <!--SpringBoot 与SpringCloud版本对应-->
+        <!-- https://docs.spring.io/spring-cloud-release/reference/index.html -->
+        <spring-boot.version>2.7.0</spring-boot.version>
+        <spring-cloud.version>2021.0.4</spring-cloud.version>
+        <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
+        <dubbo.version>3.3.0-beta.1</dubbo.version>
+
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+
+        <!-- 所有子项目继承的依赖 -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--Spring Cloud 相关依赖-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <!--compile 这是默认的作用范围。当依赖的作用范围为 compile 时，它将会参与项目的编译、测试和运行过程，并且会被打包到最终的构建产物中 -->
+                <!--test 该依赖只会参与项目的测试过程，不会参与项目的编译和运行过程，也不会被打包到最终的构建产物中-->
+                <!--provided 当依赖的作用范围为 provided 时，表明该依赖由运行环境（例如应用服务器）提供，不会被打包到最终的构建产物中。-->
+                <!--import表示该依赖会被导入到当前项目的依赖管理中，但不会被实际使用-->
+                <scope>import</scope>
+            </dependency>
+            <!--Spring Cloud Alibaba 相关依赖-->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-bom</artifactId>
+                <version>${dubbo.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+</project>

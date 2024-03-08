@@ -1,0 +1,9 @@
+server:
+  port: 18083
+spring:
+  application:
+    name: mall-storage
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://localhost:8848

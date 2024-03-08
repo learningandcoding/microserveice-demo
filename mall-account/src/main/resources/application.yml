@@ -1,0 +1,9 @@
+server:
+  port: 18081
+spring:
+  application:
+    name: mall-account
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://localhost:8848
